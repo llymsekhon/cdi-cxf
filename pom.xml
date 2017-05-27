@@ -319,7 +319,8 @@
             </goals>
             <configuration>
               <classResourceNames>
-                <classResourceName>com.lilly.CustomerService</classResourceName>
+                <!--classResourceName>com.lilly.CustomerService</classResourceName-->
+                <classResourceName>com.lilly.HelloService</classResourceName>
               </classResourceNames>
               <attachWadl>false</attachWadl>
             </configuration>
