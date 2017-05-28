@@ -36,6 +36,8 @@ import org.slf4j.LoggerFactory;
 @ApplicationPath("cxfcdi")
 public class CxfCdiApplication extends Application {
     @Inject
+    private HelloService helloService;
+    @Inject
     private CustomerService customerService;
     @Inject
     private RootService rootService;
@@ -67,6 +69,7 @@ public class CxfCdiApplication extends Application {
                     Arrays.asList(
                     rootService,
                     customerService,
+                    helloService,
                     jacksonJsonProvider,
                     swaggerFeature,
                     new LoggingFeature()
