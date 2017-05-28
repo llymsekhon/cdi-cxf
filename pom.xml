@@ -26,7 +26,7 @@
     <http.port>9092</http.port>
 
 
-	<!--docker.registry>edr-poc.am.lilly.com</docker.registry-->
+	<docker.registry>edr-poc.am.lilly.com</docker.registry>
 
     <!-- Docker & Fabric8 Configs -->
     <docker.from>jboss-fuse-6/fis-java-openshift:1.0</docker.from>
@@ -389,8 +389,7 @@
             <image>
               <name>${docker.image}</name>
               <build>
-                <!--from>${docker.registry}/${docker.from}</from-->
-                <from>${docker.from}</from>
+                <from>${docker.registry}/${docker.from}</from>
                 <assembly>
                   <basedir>/deployments</basedir>
                   <descriptorRef>hawt-app</descriptorRef>
