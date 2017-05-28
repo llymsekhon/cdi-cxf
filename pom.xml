@@ -8,8 +8,8 @@
   <artifactId>cdi-cxf</artifactId>
   <packaging>jar</packaging>
 
-  <name>Fabric8 :: Quickstarts :: CDI :: CXF JAX-RS</name>
-  <description>CXF JAX-RS using CDI running in a standalone Java Container</description>
+  <name>Demo</name>
+  <description>Demo</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,16 +19,11 @@
     <fabric8.version>2.2.0.redhat-079</fabric8.version>
     <docker.maven.plugin.version>0.13.6</docker.maven.plugin.version>
 
-
     <cxf.plugin.version>3.0.4.redhat-621084</cxf.plugin.version>
     <jetty-version>9.2.10.v20150310</jetty-version>
-
     <http.port>9092</http.port>
-
-
-	<docker.registry>edr-poc.am.lilly.com</docker.registry>
-
     <!-- Docker & Fabric8 Configs -->
+    <docker.registry>edr-poc.am.lilly.com</docker.registry>
     <docker.from>jboss-fuse-6/fis-java-openshift:1.0</docker.from>
     <fabric8.dockerUser>fabric8/</fabric8.dockerUser>
     <docker.image>${fabric8.dockerUser}${project.artifactId}:${project.version}</docker.image>
@@ -36,7 +31,7 @@
     <docker.port.container.jolokia>8778</docker.port.container.jolokia>
     <docker.port.container.metrics>9779</docker.port.container.metrics>
 
-    <fabric8.service.name>quickstart-java-cxf-cdi</fabric8.service.name>
+    <fabric8.service.name>java-cxf-cdi</fabric8.service.name>
     <fabric8.service.port>80</fabric8.service.port>
     <fabric8.service.containerPort>${http.port}</fabric8.service.containerPort>
     <fabric8.annotations.service.apiman.io.servicePath>cxfcdi</fabric8.annotations.service.apiman.io.servicePath>
@@ -45,10 +40,10 @@
     <fabric8.annotations.service.apiman.io.descriptionType>SwaggerJSON</fabric8.annotations.service.apiman.io.descriptionType>
 
     <fabric8.label.container>java</fabric8.label.container>
-    <fabric8.label.group>quickstarts</fabric8.label.group>
+    <fabric8.label.group>demos</fabric8.label.group>
     <fabric8.label.component>${project.artifactId}</fabric8.label.component>
     <fabric8.label.container>java</fabric8.label.container>
-    <fabric8.label.group>quickstarts</fabric8.label.group>
+    <fabric8.label.group>demos</fabric8.label.group>
     <fabric8.iconRef>java</fabric8.iconRef>
   </properties>
 
@@ -71,7 +66,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
 
   <dependencies>
 
@@ -159,7 +153,7 @@
     </dependency>
 
     <!-- these explicit transitive dependencies avoid issues of 8.x bleeding into the generated archetype
-         WARNING - this quickstart fails with jetty-8.x, the symptoms are that the endpoints are not registered. -->
+         WARNING - this demo fails with jetty-8.x, the symptoms are that the endpoints are not registered. -->
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-server</artifactId>
@@ -241,43 +235,22 @@
       <artifactId>fabric8-arquillian</artifactId>
       <scope>test</scope>
     </dependency>
-
-
-		<!-- WMQ -->
-		<!--dependency>
-			<groupId>mq</groupId>
-			<artifactId>com.ibm</artifactId>
-        		<version>1.0.0</version>
-			<scope>system</scope>
-			<systemPath>/home/max/projects/cdi-cxf/com.ibm.mq.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>mqjms</groupId>
-			<artifactId>com.ibm</artifactId>
-        		<version>1.0.0</version>
-			<scope>system</scope>
-			<systemPath>/home/max/projects/cdi-cxf/com.ibm.mqjms.jar</systemPath>
-		</dependency-->
-
-
-		<dependency>
-			<groupId>com.ibm</groupId>
-			<artifactId>com.ibm.mq</artifactId>
-			<version>7.1.0.5</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ibm</groupId>
-			<artifactId>com.ibm.mqjms</artifactId>
-			<version>7.1.0.5</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>javax.jms</groupId>
-			<artifactId>jms</artifactId>
-			<version>1.1</version>
-		</dependency>
-
+    <!-- WMQ -->
+    <dependency>
+      <groupId>com.ibm</groupId>
+      <artifactId>com.ibm.mq</artifactId>
+      <version>7.1.0.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm</groupId>
+      <artifactId>com.ibm.mqjms</artifactId>
+      <version>7.1.0.5</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.jms</groupId>
+      <artifactId>jms</artifactId>
+      <version>1.1</version>
+      </dependency>
   </dependencies>
 
   <build>
@@ -371,8 +344,8 @@
           <execution>
             <id>hawt-app</id>
             <goals>
-<goal>build</goal>
-</goals>
+              <goal>build</goal>
+            </goals>
             <configuration>
               <javaMainClass>com.lilly.ApplicationStarter</javaMainClass>
             </configuration>
@@ -456,6 +429,5 @@
       </build>
     </profile>
   </profiles>
-
 
 </project>
