@@ -13,7 +13,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+    <docker.registry>edr-poc.am.lilly.com</docker.registry>
     <!-- the version of the BOM, defining all the dependency versions -->
     <fuse.version>6.2.1.redhat-084</fuse.version>
     <fabric8.version>2.2.0.redhat-079</fabric8.version>
@@ -24,8 +24,10 @@
     <http.port>9092</http.port>
     <!-- Docker & Fabric8 Configs -->
     <docker.registry>edr-poc.am.lilly.com</docker.registry>
-    <docker.from>jboss-fuse-6/fis-java-openshift:1.0</docker.from>
-    <fabric8.dockerUser>fabric8/</fabric8.dockerUser>
+    <!--docker.from>jboss-fuse-6/fis-java-openshift:1.0</docker.from-->
+    <docker.from>fis-java-openshift-distro</docker.from>
+    <!--fabric8.dockerUser>fabric8/</fabric8.dockerUser-->
+    <fabric8.dockerUser>ch98507-poc1/</fabric8.dockerUser>
     <docker.image>${fabric8.dockerUser}${project.artifactId}:${project.version}</docker.image>
     <docker.port.container.http>${http.port}</docker.port.container.http>
     <docker.port.container.jolokia>8778</docker.port.container.jolokia>
@@ -360,12 +362,15 @@
         <configuration>
           <images>
             <image>
-              <name>${docker.image}</name>
+              <!--name>${docker.image}</name-->
+              <name>${docker.registry}/${docker.image}</name>
               <build>
-                <from>${docker.registry}/${docker.from}</from>
+                <!--from>${docker.registry}/${docker.from}</from-->
+                <from>${docker.from}</from>
                 <assembly>
                   <basedir>/deployments</basedir>
-                  <descriptorRef>hawt-app</descriptorRef>
+                  <!--descriptorRef>hawt-app</descriptorRef-->
+                  <descriptor>${project.basedir}/src/main/resources/hawt-app-assembly.xml</descriptor>
                 </assembly>
                 <env>
                   <JAVA_LIB_DIR>/deployments/lib</JAVA_LIB_DIR>
@@ -426,6 +431,15 @@
       </properties>
       <build>
         <defaultGoal>clean install docker:build fabric8:json fabric8:apply</defaultGoal>
+      </build>
+    </profile>
+    <profile>
+      <id>f8-local-nodeploy</id>
+      <properties>
+        <fabric8.recreate>true</fabric8.recreate>
+      </properties>
+      <build>
+        <defaultGoal>clean install docker:build fabric8:json</defaultGoal>
       </build>
     </profile>
   </profiles>

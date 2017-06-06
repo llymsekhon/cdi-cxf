@@ -1,0 +1,30 @@
+<assembly>
+  <id>hawt-app</id>
+  <fileSets>
+    <fileSet>
+      <includes>
+        <include>bin/*</include>
+      </includes>
+      <directory>${project.build.directory}/hawt-app</directory>
+      <outputDirectory>.</outputDirectory>
+      <fileMode>0755</fileMode>
+    </fileSet>
+    <fileSet>
+      <includes>
+        <include>lib/*</include>
+      </includes>
+      <directory>${project.build.directory}/hawt-app</directory>
+      <outputDirectory>.</outputDirectory>
+      <fileMode>0644</fileMode>
+    </fileSet>
+    <!-- assembly extention... -->
+    <fileSet>
+      <includes>
+        <include>customfiles/*</include>
+      </includes>
+      <directory>${project.basedir}/src/main/resources</directory>
+      <outputDirectory>.</outputDirectory>
+      <fileMode>0644</fileMode>
+    </fileSet>
+  </fileSets>
+</assembly>
